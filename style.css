@@ -1,0 +1,167 @@
+html, body, .page {
+	height: 100%; /* needed for proper layout */
+	font-family: Roboto, Arial, Helvetica;
+	color: rgb(102, 102, 102);
+	line-height: 1.7em;
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+a {
+	color: #00a9c6;
+}
+
+/* What's actually happening here is that the sections of the page are always
+   visible and automatically consume the available space. */
+.page {
+	display: flex;
+	flex-direction: column;
+}
+
+.site-header {
+	flex: 0 0 auto;
+	background-color: rgb(248, 248, 248);
+	padding: 0.25em 0;
+	border-bottom: 1px solid #e7e7e7;
+}
+
+/* The content, however, gets a scrollbar when content overflows available space.
+   Note that this means the scrollbar is only for the content! */
+.content {
+	flex: 1 1 auto;
+	position: relative; /* need this to position inner content */
+	overflow-y: auto;
+	padding: 2em 1em;
+}
+
+.site-footer {
+	flex: 0 0 auto;
+	background-color: rgb(17, 17, 17);
+	color: rgb(170, 170, 170);
+	text-align: center;
+}
+
+h1, h2, h3 {
+	font-weight: 300;
+}
+
+h1 {
+	text-align: center;
+	margin: 0 0 0.5em 0;
+}
+
+h2 {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+
+h3 {
+	margin-top: 0.25em;
+}
+
+#price-heading {
+	text-align: center;
+}
+
+/* Lists without icons before each item */
+.list-no-icon {
+	list-style: none;
+}
+
+/* Nav list is horizontal */
+.nav-list li {
+	display: inline;
+	padding-right: 1em;
+}
+
+.nav-list {
+	text-align: right;
+	margin-top: -2em;
+	font-size: 110%;
+}
+
+/* Nav list links are coloured uniquely */
+.nav-list a {
+	color: rgb(102, 102, 102);
+}
+
+.nav-list a:hover {
+	color: rgb(62, 62, 62);
+	text-decoration: none;
+}
+
+/* Flat design instead of Bootstrap's default rounded design */
+.form-control {
+	margin-bottom: 0.5em;
+	border-radius: 0;
+}
+
+/* Submit button matches the form controls */
+.send-button {
+	color: white;
+	background: #00a9c6;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+}
+
+/* We want to be sure that the last element(s) on the page have some margins
+   at the bottom so that the footer doesn't start too abruptly. */
+form, #contact-info {
+	margin-bottom: 2em;
+}
+
+/* Runs for tablets and mobile (anything that isn't what Bootstrap considers a
+   desktop) */
+@media (max-width: 991px) {
+	/* Tiny footer for mobile */
+	.site-footer{
+		padding: 0.25em 0;
+	}
+
+	/* Logo is huge -- shrink it too */
+	#logo {
+		height: 5em;
+	}
+
+	/* No massive padding that we can't afford for the first level of the list */
+	.parent-list {
+		padding-left: 0;
+	}
+
+	/* Mobile can't take the degree of padding the nav list has on desktop -- so
+	   instead, just put an interpunct between each item */
+	.nav-list li {
+		padding-right: 0;
+	}
+
+	.nav-list li:not(:last-child):after {
+		content: " · ";
+	}
+
+	.nav-list {
+		padding-right: 0.5em;
+	}
+}
+
+/* Desktop only styles */
+@media (min-width: 992px) {
+	/* Big footer for non-mobile */
+	.site-footer {
+		padding: 3em 0;
+	}
+
+	/* The main content on the page gets padding so it appears more centered. Also
+	   eases readability, since reading long lines is harder than short ones. */
+	.page > div {
+		padding-left: 20%;
+		padding-right: 20%;
+	}
+
+	/* Make the form sort of centered */
+	form {
+		padding: 0 20%;
+	}
+}
