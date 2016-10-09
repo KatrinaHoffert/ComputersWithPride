@@ -61,12 +61,6 @@ h3 {
 	margin-top: 0.25em;
 }
 
-.contactForm {
-	margin-top: 1em;
-	margin-bottom: 0.5em;
-	margin-left: 5.8em;
-}
-
 #price-heading {
 	text-align: center;
 }
@@ -99,7 +93,7 @@ h3 {
 }
 
 .required {
-	margin-left: 12.5em;
+	text-align: center;
 	color:red;
 }
 
@@ -183,5 +177,9 @@ form, #contact-info {
 	/* Make the form sort of centered */
 	form {
 		padding: 0 20%;
+	}
+
+	.contactForm {
+		padding-left: 15%;
 	}
 }
