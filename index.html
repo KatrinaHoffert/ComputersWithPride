@@ -73,7 +73,7 @@
 								<ul>
 									<li>Hardware &amp; software upgrade</li>
 									<li>Hardware upgrades such as: video card(s), memory, hard drive etc</li>
-									<li>Software upgrades such as Operating System, antivirus, PC updates etc</li>
+									<li>Software upgrades such as Operating System, antivirus, PC updates, etc</li>
 								</ul>
 							</div>
 					</div>
@@ -103,22 +103,25 @@
 					</div>
 				</div>
 
-				<h2 id="contact-section">Get in touch to start your repair</h2>
+				<h2 class="contactForm" id="contact-section">Get in touch to start your repair</h2>
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-8">
-							<form action="mail.php" method="POST">
-								<input name="name" placeholder="Name" class="form-control" type="text" />
-								<input name="email" placeholder="Email" class="form-control" type="email" />
-								<input name="phone" placeholder="Phone Number" class="form-control" type="tel" />
-								<textarea name="message" rows="5" placeholder="Message" class="form-control"></textarea>
+							<p class="required">*required field</p>
+							<form method="post" action="?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?">
+							<!--<form action="mail.php" method="POST">-->
+								<input name="name" placeholder="Name" class="form-control" type="text"><div class="error"><?php echo $nameError;?></div>
+								<input name="email" placeholder="Email" class="form-control" type="email" /><div class="error"><?php echo $emailError;?></div>
+								<input name="phone" placeholder="Phone Number" class="form-control" type="tel" /><div class="error"><?php echo $phoneError;?></div>
+								<textarea name="message" rows="5" placeholder="Message" class="form-control"></textarea><div class="error"><?php echo $messageError;?></div>
 								<input type="submit" class="btn btn-primary send-button" value="SEND" /><br />
 							</form>
 						</div>
 						<div class="col-md-4">
 							<div id="contact-info">
 								<h3>Computers With Pride</h3>
-								<a href="https://www.google.ca/maps/place/40+Alexander+St,+Toronto,+ON+M4Y+1B5/@43.6635576,-79.3842414,17z/data=!3m1!4b1!4m5!3m4!1s0x882b34b36178483b:0x661640c545aeb959!8m2!3d43.6635537!4d-79.3820527?hl=en">1412-40 Alexander St.<br />
+								<a href="https://www.google.ca/maps/place/40+Alexander+St,+Toronto,+ON+M4Y+1B5/@43.6635576,-79.3842414,17z/data=!3m1!4b1!4m5!3m4!1s0x882b34b36178483b:0x661640c545aeb959!8m2!3d43.6635537!4d-79.3820527?hl=en">
+								1412-40 Alexander St.<br />
 								Toronto, ON M4Y 1B5</a><br />
 								Phone: 1234567891<br />
 								Email: <a href="mailto:info@computerswithpride.ca">info@computerswithpride.ca</a><br />
@@ -126,7 +129,10 @@
 
 								<h3>Hours</h3>
 								Monday-Saturday: 9:00am-8:00pm<br />
-								Sunday: 9:00am-6:00pm
+								Sunday: 9:00am-6:00pm<br /><br />
+								
+								<a href=""><img src="images/facebook-logo.png" /></a>
+								<a href=""><img src="images/twitter-icon.png" /></a>	
 							</div>
 						</div>
 					</div>

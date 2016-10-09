@@ -61,6 +61,12 @@ h3 {
 	margin-top: 0.25em;
 }
 
+.contactForm {
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+	margin-left: 5.8em;
+}
+
 #price-heading {
 	text-align: center;
 }
@@ -92,6 +98,11 @@ h3 {
 	text-decoration: none;
 }
 
+.required {
+	margin-left: 12.5em;
+	color:red;
+}
+
 /* Flat design instead of Bootstrap's default rounded design */
 .form-control {
 	margin-bottom: 0.5em;
@@ -105,6 +116,15 @@ h3 {
 	width: 100%;
 	border: none;
 	border-radius: 0;
+}
+
+.error {
+	color:red;
+}
+
+/* Make the contact form more compact */
+#contact-info h3 {
+	margin-top: 0;
 }
 
 /* We want to be sure that the last element(s) on the page have some margins
