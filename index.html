@@ -23,7 +23,8 @@
 			<div class="content">
 				<h1 id="top">Pride in computer repair</h1>
 				<h2 id="about-section">About</h2>
-				<p>We are a home based computer repair service, focusing, but not solely, on and for the Queer community, offering both drop off, on site and remote support. After noticing a lack of repair places near the Church &amp; Wellesley village we decided to open to help the community and surrounding areas.</p>
+				<p>We are a local, home based computer repair service, focusing, but not solely, on and for the Queer community, offering both drop off, on site and remote support. After noticing a lack 
+				of repair places near the Church &amp; Wellesley village we decided to open to help the community and surrounding areas with their computer repair needs.</p>
 
 				<h2 id="services-section">Our Services</h2>
 				<div class="container-fluid">
@@ -93,7 +94,7 @@
 							<li>System Tune-up: $70</li>
 							<li>Data Backup:
 								<ul class="list-no-icon">
-									<li>If available – FREE</li>
+									<li>If available - FREE</li>
 									<li>Unavailable - $100</li>
 								</ul>
 							</li>
@@ -108,12 +109,11 @@
 					<div class="row">
 						<div class="col-md-8">
 							<p class="required">*required field</p>
-							<form method="post" action="?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?">
-							<!--<form action="mail.php" method="POST">-->
-								<input name="name" placeholder="Name" class="form-control" type="text"><div class="error"><?php echo $nameError;?></div>
-								<input name="email" placeholder="Email" class="form-control" type="email" /><div class="error"><?php echo $emailError;?></div>
-								<input name="phone" placeholder="Phone Number" class="form-control" type="tel" /><div class="error"><?php echo $phoneError;?></div>
-								<textarea name="message" rows="5" placeholder="Message" class="form-control"></textarea><div class="error"><?php echo $messageError;?></div>
+							<form action="mail.php" method="POST" onsubmit="return validateForm();">
+								<input name="name" placeholder="Name*" class="form-control" type="text" required="required" />
+								<input name="email" placeholder="Email*" class="form-control" type="email" required="required" />
+								<input name="phone" placeholder="Phone Number*" class="form-control" type="tel" required="required" />
+								<textarea name="message" rows="5" placeholder="Message*" class="form-control" required="required"></textarea>
 								<input type="submit" class="btn btn-primary send-button" value="SEND" /><br />
 							</form>
 						</div>
@@ -123,7 +123,7 @@
 								<a href="https://www.google.ca/maps/place/40+Alexander+St,+Toronto,+ON+M4Y+1B5/@43.6635576,-79.3842414,17z/data=!3m1!4b1!4m5!3m4!1s0x882b34b36178483b:0x661640c545aeb959!8m2!3d43.6635537!4d-79.3820527?hl=en">
 								1412-40 Alexander St.<br />
 								Toronto, ON M4Y 1B5</a><br />
-								Phone: 1234567891<br />
+								Phone: 416-992-2474<br />
 								Email: <a href="mailto:info@computerswithpride.ca">info@computerswithpride.ca</a><br />
 								website: <a href="http://www.computerswithpride.ca">www.computerswithpride.ca</a><br /><br />
 
@@ -131,8 +131,8 @@
 								Monday-Saturday: 9:00am-8:00pm<br />
 								Sunday: 9:00am-6:00pm<br /><br />
 								
-								<a href=""><img src="images/facebook-logo.png" /></a>
-								<a href=""><img src="images/twitter-icon.png" /></a>	
+								<a href=""><img src="images/facebook-logo.png" alt="Facebook" title="Like us on Facebook!" /></a>
+								<a href=""><img src="images/twitter-icon.png" alt="Twitter" title="Check us out on Twitter!" /></a>
 							</div>
 						</div>
 					</div>
@@ -142,5 +142,90 @@
 		</div>
 		<script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script>
+			// From http://stackoverflow.com/a/3261380/1968462
+			String.prototype.isEmpty = function() {
+				return (this.length === 0 || !this.trim());
+			};
+
+			// From http://stackoverflow.com/a/5448595/1968462
+			function findGetParameter(paramName) {
+					var result = null;
+					var tmp = [];
+
+					location.search
+							.substr(1)
+							.split("&")
+							.forEach(function (item) {
+								tmp = item.split("=");
+								if (tmp[0] === paramName) result = decodeURIComponent(tmp[1]);
+							});
+					return result;
+			}
+
+			// Validates the form. Returns true if the form is valid and false otherwise. Currently we
+			// just check that all required fields are filled in 
+			function validateForm() {
+				// For now just gonna simply not send the form until the input is valid, with inputs being
+				// flagged in a clear red when they aren't valid. The validation rules are simple enough
+				// that we need not explain why you failed validation. It's enough to point out the field.
+				var valid = true;
+
+				$("input, textarea").removeClass("field-error");
+
+				if($("input[name=name]").val().isEmpty()) {
+					valid = false;
+					$("input[name=name]").addClass("field-error");
+				}
+				if($("input[name=email]").val().isEmpty()) {
+					valid = false;
+					$("input[name=email]").addClass("field-error");
+				}
+				if($("input[name=email]").val().indexOf("@") === -1) {
+					valid = false;
+					$("input[name=email]").addClass("field-error");
+				}
+				if($("input[name=phone]").val().isEmpty()) {
+					valid = false;
+					$("input[name=phone]").addClass("field-error");
+				}
+				if($("textarea[name=message]").val().isEmpty()) {
+					valid = false;
+					$("textarea[name=message]").addClass("field-error");
+				}
+
+				return valid;
+			}
+
+			// Check if this was a postback and if so, display an appropriate message
+			var postbackResults = findGetParameter("success");
+			if(postbackResults != null) {
+				jQuery("<div/>", {
+					id: "formResultMessage",
+					style: "display: none;",
+				}).appendTo("body");
+
+				if(postbackResults === "true") {
+					$('#formResultMessage').addClass("success");
+					$('#formResultMessage').html("Thank you. Your email has been sent. We'll get back to you shortly.");
+				}
+				else {
+					$('#formResultMessage').addClass("error");
+					$('#formResultMessage').html("An error has occurred in sending the message. Please call us instead.");
+				}
+				$('#formResultMessage').fadeIn(500);
+
+				setTimeout(function(){
+					$("#formResultMessage").fadeOut(500, function(){
+						$('#formResultMessage').remove();
+					});
+				}, 4000);
+
+				// Now change the URL that appears in the address bar so that if the user copies it,
+				// they won't get the form message appearing again.
+				var thisPageName = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
+				history.replaceState({}, null, thisPageName);
+			}
+		</script>
 	</body>
 </html>
